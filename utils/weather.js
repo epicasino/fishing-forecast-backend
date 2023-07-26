@@ -39,20 +39,25 @@ const currentWeather = async (lat, lon) => {
   return today;
 };
 
-const getWeather = async (input) => {
+const getCurrentWeather = async (input) => {
   const userLocation = await geoCode(input);
   const { lat, lon } = userLocation;
 
-  // const today = await currentWeather(lat, lon);
-  // const forecast = await weatherForecast(lat, lon);
-
   return {
     currentWeather: await currentWeather(lat, lon),
+  };
+};
+
+const getWeatherForecast = async (input) => {
+  const userLocation = await geoCode(input);
+  const { lat, lon } = userLocation;
+
+  return {
     weatherForecast: await weatherForecast(lat, lon),
   };
 };
 
-module.exports = getWeather;
+module.exports = {getCurrentWeather, getWeatherForecast};
 
 // https://api.open-meteo.com/v1/forecast?latitude=32.7157&longitude=-117.1647&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto
 
